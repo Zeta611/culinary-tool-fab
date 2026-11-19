@@ -1,4 +1,4 @@
-# Food Tool Fab
+# Culinary Tool Fab
 
 ## Developing
 
@@ -18,3 +18,5 @@ pnpm run build
 ```
 
 You can preview the production build with `pnpm run preview`.
+
+![Farm to table software](https://jlubin.net/assets/farm-to-table.png)
