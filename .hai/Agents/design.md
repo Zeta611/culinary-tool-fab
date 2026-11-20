@@ -1,126 +1,56 @@
 # Design Guide
 
-<!--
-## How To Use This File
+Concrete visual language for Culinary Tool Fab. **Full agent-facing style guide:** [`src/lib/design/STYLE_GUIDE.md`](../../src/lib/design/STYLE_GUIDE.md).
 
-- This is the project's single source of truth for concrete visual style:
-  tokens, components, spacing, type, motion, and voice.
-- Builders (Augustus, Julius) read it before writing any UI and match it.
-- Hephaestus designs within it; Athena and Hephaestus check the artifact's adherence to it. When a
-  style choice conflicts with an outside pattern, THIS FILE wins — it is the
-  project's truth, not the reviewer's preference.
-- Replace every placeholder below with your real design system. Delete the
-  sections you don't need; add the ones you do.
-- Already have a design system elsewhere (a shared brand repo, a component
-  library, a Figma spec)? Keep this file as a short pointer to that source
-  instead of filling it in; agents still read this file before UI work.
--->
-
-The concrete visual language for this project. Hephaestus designs within it,
-builders match it, and reviewers check adherence to it. If it is not written
-here, it is not the standard.
+Adopted from Dish Graph’s canvas look (visual style only). Product behavior stays Culinary Tool Fab / Svelte Flow.
 
 ## Overview
 
-- Product / surface this guide covers:
-- Design intent in one line (the feeling and priorities — e.g. calm, dense,
-  playful, enterprise-serious):
-- Platforms / breakpoints:
-- Light / dark support:
+- Surface: full-viewport Svelte Flow canvas
+- Intent: calm, precise tool canvas — neutrals, blue accent, card nodes, 20px dot grid
+- Theme: system light/dark via `prefers-color-scheme`
+- Implementation: `src/lib/design/*` tokens + `src/lib/components/ui/*`
 
-## Colors
+## Color system
 
-Define tokens by role, not raw hex scattered through the UI.
+Source: `src/lib/design/colors.ts` → CSS `src/lib/design/tokens.css` (`--ctf-*`).
 
-| Token | Value | Use |
-| --- | --- | --- |
-| `color.bg` | `#______` | Page background |
-| `color.surface` | `#______` | Cards, panels |
-| `color.text` | `#______` | Primary text |
-| `color.text.muted` | `#______` | Secondary text |
-| `color.primary` | `#______` | Primary action |
-| `color.border` | `#______` | Dividers, outlines |
-| `color.success` / `warning` / `danger` | `#______` | Status |
-
-- Contrast target (e.g. WCAG AA 4.5:1 for body text):
-
-## Typography
-
-- Font family (UI / mono):
-- Type scale (size / line-height / weight):
-
-| Role | Size | Line height | Weight |
+| Role | Light | Dark | Use |
 | --- | --- | --- | --- |
-| Display | | | |
-| Heading | | | |
-| Body | | | |
-| Caption | | | |
+| `bg` | `#ffffff` | `#0a0a0a` | Canvas |
+| `surface` | `#fafafa` | `#111111` | Panels |
+| `surface-2` | `#f2f2f2` | `#1a1a1a` | Media fill |
+| `border` | `#eaeaea` | `#2e2e2e` | Hairlines / grid |
+| `border-strong` | `#c9c9c9` | `#454545` | Outlines |
+| `text` | `#171717` | `#ededed` | Primary |
+| `secondary` | `#4d4d4d` | `#a0a0a0` | Body |
+| `faint` | `#8f8f8f` | `#8f8f8f` | Labels |
+| `accent` | `#006bff` | `#47a8ff` | Selection / handles |
+| `accent-soft` | `#e9f2ff` | `#0f2340` | Selection halo |
+| `edge` | `#c9c9c9` | `#454545` | Edges |
 
-## Spacing & Layout
+## Font system
 
-- Spacing scale (e.g. 4 / 8 / 12 / 16 / 24 / 32):
-- Grid / max content width:
-- Density stance (compact vs. comfortable, and where each applies):
+Source: `src/lib/design/fonts.ts`. Load with `<FontLinks />`.
 
-## Elevation & Depth
-
-- Surface layers and when to raise (shadow / border / background step):
-
-## Motion
-
-- Duration + easing tokens:
-- What animates, what must not (respect reduced-motion):
-
-## Shape & Radius
-
-- Corner radii by component size:
-- Border weights:
+- UI: Geist → `--ctf-font`
+- Mono: Geist Mono → `--ctf-font-mono`
+- Body 14/20; kind 10px uppercase; node body 12/16; walk pills 12/16
 
 ## Components
 
-The canonical component set. Reuse these before inventing new UI; a new
-component needs justification.
+Import from `#lib` / `#lib/components/ui`:
 
-| Component | Variants | Notes / when to use |
-| --- | --- | --- |
-| Button | primary / secondary / ghost / destructive | |
-| Input | | |
-| Card | | |
-| Table | | |
-| Modal / Sheet | | |
-| Toast / Banner | | |
-
-## States
-
-Every screen must handle these. Define the standard treatment for each so
-builders and reviewers judge against one bar.
-
-- **Empty** — first-use / no data:
-- **Loading** — skeleton vs. spinner, when:
-- **Error** — message tone, recovery action:
-- **Disabled** — why-disabled affordance:
-- **Permission** — no-access / restricted:
-- **No-results** — filtered/searched to nothing:
-- **Long-content** — truncation / wrapping / overflow:
-- **Many-record** — pagination / virtualization / bulk actions:
-- **Partial-success** — some items failed:
-- **Destructive-action** — confirmation, undo:
-
-## Voice & Content
-
-- Tone (e.g. plain, human, specific — no vague "Manage" / "Submit"):
-- Capitalization, punctuation, number/date formats:
-- Terminology to use / avoid:
-
-## Accessibility
-
-- Keyboard: all actions reachable and operable:
-- Focus states: visible and consistent:
-- Labels: inputs, icons, and controls have text equivalents:
-- Color is never the only signal (pair with text / icon / shape):
-- Minimum target size:
+| Component | Use |
+| --- | --- |
+| `FlowNodeCard` | Node card + kind |
+| `FlowNodeMedia` | Media / placeholder |
+| `FlowNodeBody` | Body copy |
+| `FlowFileInput` | File picker chrome |
+| `WalkStrip` | Stage pills |
+| `FontLinks` | Geist CDN links |
 
 ## Do's and Don'ts
 
-- **Do:**
-- **Don't:**
+- **Do:** Extend `colors.ts` / `fonts.ts` / UI components; follow `STYLE_GUIDE.md`.
+- **Don't:** One-off hex, daisyUI skeleton chrome, or Dish Graph feature ports for a visual pass.

@@ -10,6 +10,7 @@
   import '@xyflow/svelte/xy-theme.css';
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
+  import { WalkStrip } from '#lib/components/ui/index.js';
 
   const nodeTypes = {
     imageInputNode: ImageInputNode,
@@ -176,15 +177,17 @@
     fitView
     proOptions={{ hideAttribution: true }}
   >
-    <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+    <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
     <Panel position="bottom-center">
-      <ul class="steps">
-        <li class="step step-primary">Inspirations</li>
-        <li class="step step-primary">Image Preview</li>
-        <li class="step">Tangible Parts</li>
-        <li class="step">Tool Design</li>
-        <li class="step">Culinary Prototype</li>
-      </ul>
+      <WalkStrip
+        steps={[
+          { label: 'Inspirations', state: 'done' },
+          { label: 'Image Preview', state: 'current' },
+          { label: 'Tangible Parts' },
+          { label: 'Tool Design' },
+          { label: 'Culinary Prototype' }
+        ]}
+      />
     </Panel>
     <Controls />
   </SvelteFlow>

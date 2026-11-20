@@ -1,16 +1,5 @@
 @import 'tailwindcss';
-@plugin "daisyui" {
-   themes: caramellatte --default;
-}
+@plugin "daisyui";
 
-.svelte-flow {
-  --xy-background-color: var(--color-base-200);
-  --xy-background-pattern-dots-color: color-mix(in oklch, var(--color-base-content) 30%, transparent);
-  --xy-node-background-color: var(--color-base-100);
-  --xy-node-color: var(--color-base-content);
-  --xy-node-border: 1px solid var(--color-base-300);
-  --xy-edge-stroke: var(--color-neutral);
-  --xy-edge-label-background-color: var(--color-base-100);
-  --xy-edge-label-color: var(--color-base-content);
-  --xy-handle-background-color: var(--color-primary);
-}
+@import '../lib/design/tokens.css';
+@import '../lib/design/flow-theme.css';

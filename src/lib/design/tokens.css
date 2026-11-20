@@ -1,0 +1,82 @@
+/*
+  Design tokens — source values live in colors.ts / fonts.ts.
+  Prefer --ctf-* in new CSS. Legacy --bg aliases stay for existing flow chrome.
+*/
+
+:root {
+	color-scheme: light;
+
+	--ctf-font: 'Geist', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+	--ctf-font-mono: 'Geist Mono', ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+	--ctf-bg: #ffffff;
+	--ctf-surface: #fafafa;
+	--ctf-surface-2: #f2f2f2;
+	--ctf-border: #eaeaea;
+	--ctf-border-strong: #c9c9c9;
+	--ctf-text: #171717;
+	--ctf-secondary: #4d4d4d;
+	--ctf-faint: #8f8f8f;
+	--ctf-accent: #006bff;
+	--ctf-accent-soft: #e9f2ff;
+	--ctf-warm: #b45309;
+	--ctf-warm-soft: #fdf3e7;
+	--ctf-edge: #c9c9c9;
+
+	--ctf-radius-node: 10px;
+	--ctf-radius-panel: 10px;
+	--ctf-radius-pill: 9999px;
+	--ctf-radius-control: 6px;
+
+	--ctf-shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.04);
+	--ctf-shadow-selected: 0 0 0 3px var(--ctf-accent-soft);
+
+	--ctf-space-1: 4px;
+	--ctf-space-2: 8px;
+	--ctf-space-3: 10px;
+	--ctf-space-4: 12px;
+
+	--ctf-grid-gap: 20px;
+	--ctf-media-w: 132px;
+	--ctf-media-h: 92px;
+	--ctf-media-lg: 160px;
+
+	--ctf-duration: 160ms;
+
+	/* Legacy aliases used by flow theme / components */
+	--font: var(--ctf-font);
+	--mono: var(--ctf-font-mono);
+	--bg: var(--ctf-bg);
+	--surface: var(--ctf-surface);
+	--surface-2: var(--ctf-surface-2);
+	--border: var(--ctf-border);
+	--border-strong: var(--ctf-border-strong);
+	--text: var(--ctf-text);
+	--secondary: var(--ctf-secondary);
+	--faint: var(--ctf-faint);
+	--accent: var(--ctf-accent);
+	--accent-soft: var(--ctf-accent-soft);
+	--warm: var(--ctf-warm);
+	--warm-soft: var(--ctf-warm-soft);
+	--edge: var(--ctf-edge);
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+
+		--ctf-bg: #0a0a0a;
+		--ctf-surface: #111111;
+		--ctf-surface-2: #1a1a1a;
+		--ctf-border: #2e2e2e;
+		--ctf-border-strong: #454545;
+		--ctf-text: #ededed;
+		--ctf-secondary: #a0a0a0;
+		--ctf-faint: #8f8f8f;
+		--ctf-accent: #47a8ff;
+		--ctf-accent-soft: #0f2340;
+		--ctf-warm: #f0a35a;
+		--ctf-warm-soft: #2a1d10;
+		--ctf-edge: #454545;
+	}
+}

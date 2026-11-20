@@ -1,19 +1,8 @@
 # Product Planning
 
-<!--
-## How To Use This File
-
-- Claudia owns this file in an installed product harness.
-- Keep current product truth, backlog, active strategy, worker assignments, approvals, and user decisions here.
-- Replace placeholders with real project state after installation.
-- Keep completed evidence concise and move bulk history to `_archive/`.
-- Do not use this file as a worker journal.
-- The upstream HAI-Harness repository keeps this file blank; real project work belongs only in installed field instances.
--->
-
 Planner-owned single source of truth for the current iteration.
 
-Last updated: YYYY-MM-DD HH:MM TZ
+Last updated: 2026-11-19 18:10 PST
 Last updated by: Claudia
 User check-in after material clarification: not required
 High-cost execution approved: no
@@ -31,106 +20,77 @@ Priority options: `P0` (must now), `P1` (soon), `P2` (nice), `P3` (maybe).
 
 ## Current Product Truth
 
-- Product direction:
-- Current scope boundary:
-- Non-negotiable constraint:
-- Latest decision that supersedes older material:
+- Product direction: Culinary Tool Fab canvas workflow (Svelte Flow mockup).
+- Current scope boundary: visual style only — match Dish Graph look without replacing functionality or product model.
+- Non-negotiable constraint: keep existing node graph, edges, handles, file inputs, and stage labels; no Dish Graph walkthrough/pro-mode/3D viewer port.
+- Latest decision that supersedes older material: User (2026-11-19) — replace current visual style with Dish Graph visual style only; do not do a full function replace.
 
 ## 1. Inbox (untriaged)
-
-- **[ ]** (type) Short description — notes / links
 
 ## 2. Backlog
 
 | ID | Title | Type | Priority | Status | Owner | Notes / Links |
 | --- | --- | --- | --- | --- | --- | --- |
-| T-1 | Replace with real task | feature | P1 | inbox | - | Delete or overwrite this row once real work exists. |
 
 ## 3. Active Queue
 
-### <Task ID> — <Title>
+### T-visual — Dish Graph visual style on canvas
 
-- **Status:** ready / in progress / blocked / done
-- **Priority:** P0 / P1 / P2 / P3
-- **Owner sequence:** Claudia builds by default → Hephaestus/Athena if needed → delegated worker only on a trigger → independent review only for risk areas
-- **Builder:** Claudia / delegated worker (trigger: none)
-- **Current handoff:** `handoffs/<file>.md`, or none
-- **Design contract:** `designs/<artifact>/design.md`, or none
-- **Dependencies:** exact artifact, ordering, external state, or independent
-- **User-approved execution:** no
-- **High-cost approval:** not required / pending / approved
-- **Outward-act approval:** none; each push, PR, deploy, message, or other external act must be named explicitly
+- **Status:** ready for user review (design system extracted)
+- **Priority:** P0
+- **Owner sequence:** Claudia builds
+- **Builder:** Claudia (trigger: none)
+- **Current handoff:** none
+- **Design contract:** Dish Graph `index.html` visual tokens as reference; `.hai/Agents/design.md` updated to record adopted tokens
+- **Dependencies:** independent
+- **User-approved execution:** yes (visual-only restyle)
+- **High-cost approval:** not required for CSS/component restyle; `pnpm run check` optional
+- **Outward-act approval:** none
 
 Required outcome:
 
-1. Observable result.
-2. Preservation constraint.
-3. Stop condition.
+1. Canvas, nodes, edges, controls, and bottom stage strip use Dish Graph neutrals, accent, card nodes, and dot grid.
+2. Graph topology, node types, file input, and stage labels preserved.
+3. Stop when visual match is reviewable in the task-lane preview; no Dish Graph behavior ported.
 
 Completion evidence:
 
-- Files or surfaces changed:
-- Low-cost verification passed:
-- High-cost verification run or intentionally not run:
-- Remaining user-owned verification:
+- Files or surfaces changed: `src/lib/design/*`, `src/lib/components/ui/*`, node wrappers, `layout.css`, `design.md`, `STYLE_GUIDE.md`
+- Low-cost verification passed: `pnpm run check` — 0 errors (after component extraction)
+- High-cost verification run or intentionally not run: not run
+- Remaining user-owned verification: visual review at http://localhost:5173/ (task lane)
 
 ### 3a. Current Iteration Strategy
 
-- Goal:
-- Why now:
+- Goal: Restyle Culinary Tool Fab to Dish Graph visual language.
+- Why now: User chose Dish Graph canvas look; rejected full functional replace.
 - Context gathered:
-  - Fact:
-  - Fact:
+  - Fact: Dish Graph uses Geist, light/dark neutrals, accent blue, 20px dot grid, 10px card nodes with soft shadow and accent selection ring.
+  - Fact: Culinary Tool Fab is Svelte Flow with image-input and placeholder nodes plus a static stage strip.
 - Architectural or product decision:
-  - Decision:
-  - Constraint:
-  - Out of scope:
-- Delegation (Claudia builds by default; name the trigger when a worker builds; two workers only if both queues clear the Parallel Split Gate):
-  - Augustus:
-  - Julius:
-  - Parallel Split Gate result:
+  - Decision: CSS/token and node chrome only; keep Svelte Flow behavior.
+  - Constraint: No Dish Graph walkthrough, pro mode, linking tools, or 3D viewer.
+  - Out of scope: Functional parity with Dish Graph.
+- Delegation: Claudia builds; Parallel Split Gate N/A
 - Risks / ambiguity:
-  - Risk:
+  - Risk: daisyUI leftover classes vs custom chrome — neutralize with Dish Graph CSS.
 
 ### 3b. Implementation Queues
 
-Assigned queue for Augustus (only when delegated):
+Assigned queue for Augustus: Not assigned.
 
-1. Not assigned.
-
-Assigned queue for Julius (only when delegated):
-
-1. Not assigned.
-
-Advancement rule:
-
-- Continue directly to the next approved queued task after the current one is complete.
-- Pause for a blocking user decision, broken assumption, write-scope collision, missing high-cost approval, or unapproved outward act.
-
-Verification rule:
-
-- Use low-cost verification by default.
-- Record high-cost verification explicitly before assigning or running it.
-- Never claim rendered, integration, or networked acceptance when it was not performed.
+Assigned queue for Julius: Not assigned.
 
 ### 3c. Decision Needed From User
 
-- Decision:
-- Why it blocks:
-- Options already ruled out:
+- Decision: none blocking
 
 ## 4. Bugs (optional detail)
 
 | Bug ID | Title | Severity | Status | Repro steps | Notes |
 | --- | --- | --- | --- | --- | --- |
-| B-1 | Replace with real bug | medium | inbox | Repro steps | Notes |
 
 ## 5. Feature Ideas / Roadmap
-
-- **Idea:** Short name
-- **Why:** User or product rationale
-- **Rough scope:** S / M / L
-- **Notes:** Links, dependencies, or previous decisions
 
 ## 6. Archived State
 
