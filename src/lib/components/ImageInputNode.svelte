@@ -1,7 +1,25 @@
 <script lang="ts">
   import { Handle, Position, type NodeProps } from '@xyflow/svelte';
+  import { store } from '#lib/store.svelte.ts';
 
-  let { data: _data }: NodeProps = $props();
+  let { id, data: _data }: NodeProps = $props();
+
+  let previewUrl = $state<string | null>(null);
+
+  function handleFileChange(e: Event & { currentTarget: HTMLInputElement }) {
+    const file = e.currentTarget.files?.[0];
+    if (!file || !file.type.startsWith('image/')) return;
+    previewUrl = URL.createObjectURL(file);
+    store.inputImages.set(id, previewUrl);
+  }
+
+  // $effect(() => {
+  //   const url = previewUrl;
+  //   return () => {
+  //     if (url) URL.revokeObjectURL(url);
+  //   };
+  // });
+
   let dialog: HTMLDialogElement;
 
   // fix the exit animation playing inside the node
@@ -18,7 +36,11 @@
     class="nodrag cursor-pointer"
     onclick={() => dialog.showModal()}
   >
-    <div class="h-48 w-64 skeleton"></div>
+    {#if previewUrl === null}
+      <div class="h-48 w-64 skeleton"></div>
+    {:else}
+      <img src={previewUrl} alt="Inspiration preview" class="h-48 w-64 rounded object-cover" />
+    {/if}
   </button>
   <Handle type="source" position={Position.Right} />
 </div>
@@ -27,8 +49,13 @@
   <div class="modal-box">
     <h3 class="text-lg font-bold">Upload an image</h3>
     <div class="flex flex-col items-center gap-3">
-      <div class="h-48 w-64 skeleton"></div>
-      <input type="file" class="file-input file-input-sm" />
+      {#if previewUrl === null}
+        <div class="h-48 w-64 skeleton"></div>
+      {:else}
+        <img src={previewUrl} alt="Selected inspiration" />
+      {/if}
+
+      <input type="file" class="file-input file-input-sm" onchange={handleFileChange} />
     </div>
     <div class="modal-action">
       <form method="dialog">
