@@ -1,0 +1,13 @@
+{
+  "schema_version": "product-lab-project/v1",
+  "project_id": "culinary-tool-fab",
+  "name": "Culinary Tool Fab",
+  "aliases": [
+    "culinary-tool-fab",
+    "Culinary Tool Fab",
+    "Culinary-Tool-Fab"
+  ],
+  "status": "active",
+  "catalog": "../_catalog",
+  "pks_project_page": null
+}
