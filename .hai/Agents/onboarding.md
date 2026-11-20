@@ -55,6 +55,7 @@ If the root entry point did not already do so, run `node .hai/Agents/check-for-u
   - a custom role's `route-when` clearly matches the request (see Custom roles and skills below).
 
   Details are in [claudia.md](claudia.md).
+
 - **Delegation mechanics.** When delegating: one engineer per task lane, given follow-ups as new contracts rather than respawned, and kept through the host's context compaction rather than replaced; Claudia waits on results instead of polling; workers report once, when done or blocked. See [claudia.md](claudia.md) and the worker role docs.
 - Claudia is also the root controller and live orchestrator. Once work is clear, sufficiently confident, authorized, and free of write-scope conflicts, she builds it or delegates it as described above and keeps the user informed. She pauses only for a material product decision, unresolved ambiguity, low confidence, a scope or dependency collision, missing high-cost approval, or a required outward-act approval.
 - **Model tier and effort are decided per task, with quality as the bar.** Claudia runs on the model and effort the user set. Each worker's tier and effort are her decision, not a copy of her own, based on the task's checkability, judgment, blast radius, breadth and track record. Checkable, low-judgment work runs light behind a verifier; open judgment or a large blast radius runs deep. She escalates on evidence and never trades quality for speed or cost (see Model and effort routing in [claudia.md](claudia.md)). Harness files never name a provider, model, or version.

@@ -223,18 +223,18 @@ Ask the human only when missing information changes product truth, user capabili
 
 ## Quick Reference
 
-| Need | Design move | Useful starting point |
-| --- | --- | --- |
-| Immediate feedback | Change state on input, not completion | Press response around `100ms` |
-| Direct drag | Track pointer and grab offset | Movement threshold around `10px` |
-| Interruptible motion | Retarget from live value and velocity | Never disable input during transition |
-| Default physical motion | Use a critically damped spring | No bounce; response around `0.3–0.4s` |
-| Momentum motion | Hand off velocity and project the snap point | Slight bounce only after a flick |
-| Reversible transition | Use the same origin and path both ways | Anchor to the causal control |
-| Touch operability | Provide a comfortable hit region | Roughly `44×44px` |
-| Reduced motion | Preserve feedback without travel | Cross-fade or static change |
-| Clear hierarchy | Establish one visual climax | Order, space, and type before containers |
-| Trust | Expose status, provenance, and recovery | Never leave action looking inert |
+| Need                    | Design move                                  | Useful starting point                    |
+| ----------------------- | -------------------------------------------- | ---------------------------------------- |
+| Immediate feedback      | Change state on input, not completion        | Press response around `100ms`            |
+| Direct drag             | Track pointer and grab offset                | Movement threshold around `10px`         |
+| Interruptible motion    | Retarget from live value and velocity        | Never disable input during transition    |
+| Default physical motion | Use a critically damped spring               | No bounce; response around `0.3–0.4s`    |
+| Momentum motion         | Hand off velocity and project the snap point | Slight bounce only after a flick         |
+| Reversible transition   | Use the same origin and path both ways       | Anchor to the causal control             |
+| Touch operability       | Provide a comfortable hit region             | Roughly `44×44px`                        |
+| Reduced motion          | Preserve feedback without travel             | Cross-fade or static change              |
+| Clear hierarchy         | Establish one visual climax                  | Order, space, and type before containers |
+| Trust                   | Expose status, provenance, and recovery      | Never leave action looking inert         |
 
 ## Design Artifact
 
@@ -250,39 +250,51 @@ Owner: Hephaestus
 Status: Exploring / Direction set / Build-ready / Implemented / Superseded
 
 ## Design intent
+
 The user, situation, job, experience thesis, and success criteria.
 
 ## Constraints and assumptions
+
 Product truths, design-system constraints, evidence, and unresolved assumptions.
 
 ## Chosen direction
+
 The coherent design and why it wins.
 
 ## Experience flow
+
 Entry → orientation → decision → action → feedback → recovery/return.
 
 ## Surface specification
+
 Anatomy, hierarchy, exact copy, component roles, and relationships.
 
 ## Interaction and motion
+
 Triggers, behavior, feedback, interruption, transitions, and reduced-motion equivalent.
 
 ## State model
+
 Default, active, pending, success, empty, error, disabled, permission, and relevant edge states.
 
 ## Responsive and adaptive behavior
+
 Relevant widths, text scaling, input modality, contrast/transparency preferences, and localization.
 
 ## Accessibility
+
 Semantics, keyboard/focus, target sizes, announcements, contrast, and equivalent feedback.
 
 ## Preserve
+
 Existing qualities or capabilities implementation must not lose.
 
 ## Build acceptance
+
 Observable criteria that make the design complete.
 
 ## Open product decisions
+
 Only unresolved choices Hephaestus cannot settle through design judgment.
 ```
 

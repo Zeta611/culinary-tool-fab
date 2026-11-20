@@ -1,5 +1,5 @@
 @import 'tailwindcss';
-@plugin "daisyui";
+@plugin 'daisyui';
 
 @import '../lib/design/tokens.css';
 @import '../lib/design/flow-theme.css';

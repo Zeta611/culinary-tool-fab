@@ -10,15 +10,15 @@ Calm, precise tool canvas: light neutrals, blue accent, card nodes on a 20px dot
 
 ## File map
 
-| Path | Role |
-| --- | --- |
-| `src/lib/design/colors.ts` | Color system (roles, light/dark hex, usage) |
-| `src/lib/design/fonts.ts` | Font system (Geist stacks, scale, CDN URLs) |
-| `src/lib/design/tokens.css` | CSS custom properties (`--ctf-*`) |
+| Path                            | Role                                        |
+| ------------------------------- | ------------------------------------------- |
+| `src/lib/design/colors.ts`      | Color system (roles, light/dark hex, usage) |
+| `src/lib/design/fonts.ts`       | Font system (Geist stacks, scale, CDN URLs) |
+| `src/lib/design/tokens.css`     | CSS custom properties (`--ctf-*`)           |
 | `src/lib/design/flow-theme.css` | Base + Svelte Flow + component class styles |
-| `src/lib/design/STYLE_GUIDE.md` | This guide |
-| `src/lib/components/ui/*` | Reusable visual components |
-| `src/lib/index.ts` | Barrel: tokens modules + UI components |
+| `src/lib/design/STYLE_GUIDE.md` | This guide                                  |
+| `src/lib/components/ui/*`       | Reusable visual components                  |
+| `src/lib/index.ts`              | Barrel: tokens modules + UI components      |
 
 Import tokens/components:
 
@@ -40,21 +40,21 @@ Load fonts via `<FontLinks />` in `+layout.svelte` (or any root shell).
 
 Use CSS vars in styles: `var(--ctf-bg)`. Read/write hex from `colors.ts`.
 
-| Role | CSS var | Light | Dark | Use |
-| --- | --- | --- | --- | --- |
-| bg | `--ctf-bg` | `#ffffff` | `#0a0a0a` | Page / canvas |
-| surface | `--ctf-surface` | `#fafafa` | `#111111` | Panels, walk strip |
-| surface-2 | `--ctf-surface-2` | `#f2f2f2` | `#1a1a1a` | Media placeholders |
-| border | `--ctf-border` | `#eaeaea` | `#2e2e2e` | Hairlines, grid dots |
-| border-strong | `--ctf-border-strong` | `#c9c9c9` | `#454545` | Node / control outlines |
-| text | `--ctf-text` | `#171717` | `#ededed` | Primary text |
-| secondary | `--ctf-secondary` | `#4d4d4d` | `#a0a0a0` | Body |
-| faint | `--ctf-faint` | `#8f8f8f` | `#8f8f8f` | Kind labels, idle pills |
-| accent | `--ctf-accent` | `#006bff` | `#47a8ff` | Selection, handles, focus |
-| accent-soft | `--ctf-accent-soft` | `#e9f2ff` | `#0f2340` | Selection halo |
-| warm | `--ctf-warm` | `#b45309` | `#f0a35a` | Warm emphasis |
-| warm-soft | `--ctf-warm-soft` | `#fdf3e7` | `#2a1d10` | Warm fill |
-| edge | `--ctf-edge` | `#c9c9c9` | `#454545` | Graph edges |
+| Role          | CSS var               | Light     | Dark      | Use                       |
+| ------------- | --------------------- | --------- | --------- | ------------------------- |
+| bg            | `--ctf-bg`            | `#ffffff` | `#0a0a0a` | Page / canvas             |
+| surface       | `--ctf-surface`       | `#fafafa` | `#111111` | Panels, walk strip        |
+| surface-2     | `--ctf-surface-2`     | `#f2f2f2` | `#1a1a1a` | Media placeholders        |
+| border        | `--ctf-border`        | `#eaeaea` | `#2e2e2e` | Hairlines, grid dots      |
+| border-strong | `--ctf-border-strong` | `#c9c9c9` | `#454545` | Node / control outlines   |
+| text          | `--ctf-text`          | `#171717` | `#ededed` | Primary text              |
+| secondary     | `--ctf-secondary`     | `#4d4d4d` | `#a0a0a0` | Body                      |
+| faint         | `--ctf-faint`         | `#8f8f8f` | `#8f8f8f` | Kind labels, idle pills   |
+| accent        | `--ctf-accent`        | `#006bff` | `#47a8ff` | Selection, handles, focus |
+| accent-soft   | `--ctf-accent-soft`   | `#e9f2ff` | `#0f2340` | Selection halo            |
+| warm          | `--ctf-warm`          | `#b45309` | `#f0a35a` | Warm emphasis             |
+| warm-soft     | `--ctf-warm-soft`     | `#fdf3e7` | `#2a1d10` | Warm fill                 |
+| edge          | `--ctf-edge`          | `#c9c9c9` | `#454545` | Graph edges               |
 
 Legacy aliases (`--bg`, `--accent`, …) mirror `--ctf-*` for older chrome.
 
@@ -62,38 +62,38 @@ Legacy aliases (`--bg`, `--accent`, …) mirror `--ctf-*` for older chrome.
 
 ## Font system
 
-| Token | Family | CSS var | Stack |
-| --- | --- | --- | --- |
-| sans | Geist | `--ctf-font` | Geist, ui-sans-serif, system-ui, … |
-| mono | Geist Mono | `--ctf-font-mono` | Geist Mono, ui-monospace, … |
+| Token | Family     | CSS var           | Stack                              |
+| ----- | ---------- | ----------------- | ---------------------------------- |
+| sans  | Geist      | `--ctf-font`      | Geist, ui-sans-serif, system-ui, … |
+| mono  | Geist Mono | `--ctf-font-mono` | Geist Mono, ui-monospace, …        |
 
 Scale (`fontScale` in `fonts.ts`):
 
-| Role | Size / line / weight | Use |
-| --- | --- | --- |
-| body | 14 / 20 / 400 | App body |
-| kind | 10 / 14 / 400, 0.06em, uppercase | Node kind |
-| nodeBody | 12 / 16 / 400 | Node body |
-| file | 11 / 16 / 400 | File input |
-| walk | 12 / 16 / 400 | Walk pills |
-| walkCurrent | 12 / 16 / 500 | Current step |
-| edgeLabel | 11 / 14 / 400 | Edge labels |
+| Role        | Size / line / weight             | Use          |
+| ----------- | -------------------------------- | ------------ |
+| body        | 14 / 20 / 400                    | App body     |
+| kind        | 10 / 14 / 400, 0.06em, uppercase | Node kind    |
+| nodeBody    | 12 / 16 / 400                    | Node body    |
+| file        | 11 / 16 / 400                    | File input   |
+| walk        | 12 / 16 / 400                    | Walk pills   |
+| walkCurrent | 12 / 16 / 500                    | Current step |
+| edgeLabel   | 11 / 14 / 400                    | Edge labels  |
 
 CDN stylesheets: `fontStylesheets` in `fonts.ts` (jsDelivr Geist 1.3.1).
 
 ## Shape, space, motion
 
-| Token | Value |
-| --- | --- |
-| `--ctf-radius-node` / panel | 10px |
-| `--ctf-radius-pill` | 9999px |
-| `--ctf-radius-control` | 6px |
-| `--ctf-shadow-soft` | soft dual shadow |
-| `--ctf-shadow-selected` | `0 0 0 3px accent-soft` |
-| `--ctf-grid-gap` | 20px (Svelte Flow `Background` gap) |
-| `--ctf-media-w/h` | 132×92 |
-| `--ctf-media-lg` | 160×160 |
-| `--ctf-duration` | 160ms |
+| Token                       | Value                               |
+| --------------------------- | ----------------------------------- |
+| `--ctf-radius-node` / panel | 10px                                |
+| `--ctf-radius-pill`         | 9999px                              |
+| `--ctf-radius-control`      | 6px                                 |
+| `--ctf-shadow-soft`         | soft dual shadow                    |
+| `--ctf-shadow-selected`     | `0 0 0 3px accent-soft`             |
+| `--ctf-grid-gap`            | 20px (Svelte Flow `Background` gap) |
+| `--ctf-media-w/h`           | 132×92                              |
+| `--ctf-media-lg`            | 160×160                             |
+| `--ctf-duration`            | 160ms                               |
 
 Honor `prefers-reduced-motion: reduce` (already in `flow-theme.css`).
 
@@ -101,14 +101,14 @@ Honor `prefers-reduced-motion: reduce` (already in `flow-theme.css`).
 
 Build new canvas UI from these before inventing markup.
 
-| Component | Import | Purpose |
-| --- | --- | --- |
-| `FlowNodeCard` | `#lib` | Card shell + optional `kind` label; selection ring via parent `.svelte-flow__node.selected` |
-| `FlowNodeMedia` | `#lib` | Placeholder or `<img>`; `size="md" \| "lg"` |
-| `FlowNodeBody` | `#lib` | Secondary body text slot |
-| `FlowFileInput` | `#lib` | Styled file input (`nodrag` for Svelte Flow) |
-| `WalkStrip` | `#lib` | Bottom stage pills; `steps: { label, state? }[]` |
-| `FontLinks` | `#lib` | Geist stylesheet tags for `<svelte:head>` |
+| Component       | Import | Purpose                                                                                     |
+| --------------- | ------ | ------------------------------------------------------------------------------------------- |
+| `FlowNodeCard`  | `#lib` | Card shell + optional `kind` label; selection ring via parent `.svelte-flow__node.selected` |
+| `FlowNodeMedia` | `#lib` | Placeholder or `<img>`; `size="md" \| "lg"`                                                 |
+| `FlowNodeBody`  | `#lib` | Secondary body text slot                                                                    |
+| `FlowFileInput` | `#lib` | Styled file input (`nodrag` for Svelte Flow)                                                |
+| `WalkStrip`     | `#lib` | Bottom stage pills; `steps: { label, state? }[]`                                            |
+| `FontLinks`     | `#lib` | Geist stylesheet tags for `<svelte:head>`                                                   |
 
 Recipe — image node:
 
@@ -137,7 +137,12 @@ Recipe — canvas chrome:
 <SvelteFlow …>
   <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
   <Panel position="bottom-center">
-    <WalkStrip steps={[{ label: 'A', state: 'done' }, { label: 'B', state: 'current' }]} />
+    <WalkStrip
+      steps={[
+        { label: 'A', state: 'done' },
+        { label: 'B', state: 'current' }
+      ]}
+    />
   </Panel>
   <Controls />
 </SvelteFlow>

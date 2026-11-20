@@ -52,16 +52,16 @@ Include a task only when its checkout, worktree, generated target, mutable runti
 
 Record the minimum evidence needed to decide:
 
-| Field | Required evidence |
-| --- | --- |
-| Parent task | Root task/session identity that received the request |
-| Controller | Root controller identity and immutable role |
-| Lane | Task, branch, worktree, and integration target |
-| Workers | Owned child-worker identities, roles, and states |
-| Write scope | Exact files, directories, generated outputs, and config keys |
-| Dependencies | Producer/consumer order and shared mutable setup |
-| Verification | Build, test, browser, server, or export activity |
-| Protection | Baseline hashes or trees that must remain exact |
+| Field         | Required evidence                                              |
+| ------------- | -------------------------------------------------------------- |
+| Parent task   | Root task/session identity that received the request           |
+| Controller    | Root controller identity and immutable role                    |
+| Lane          | Task, branch, worktree, and integration target                 |
+| Workers       | Owned child-worker identities, roles, and states               |
+| Write scope   | Exact files, directories, generated outputs, and config keys   |
+| Dependencies  | Producer/consumer order and shared mutable setup               |
+| Verification  | Build, test, browser, server, or export activity               |
+| Protection    | Baseline hashes or trees that must remain exact                |
 | External acts | Commit, push, pull request, deploy, publish, share, or message |
 
 Read the smallest coordination set that establishes those facts: `Agents/planning.md`, relevant task documents and current handoffs, then read-only dirty inventories or hashes when ownership is disputed. Do not infer write scope from a role name, and do not infer role or parent-task provenance from write scope.

@@ -32,6 +32,7 @@ A Claudia session is the root controller for the user task that created it and s
   9. **A matching custom role.** A role in [custom/roles/](custom/roles) whose `route-when` clearly matches the request; the project asked for that routing by writing it (see Custom roles below).
 
   Otherwise Claudia builds. Pause, before building or delegating, only for a material unresolved product choice, unclear scope or acceptance criteria, insufficient confidence, a write-scope or dependency collision, missing high-cost approval, or a required outward act.
+
 - **The contract is the bridge.** A delegated worker gets the decided requirements, the options the user rejected, acceptance, the method skill, design and verification references, and stop conditions, so it can re-enter that read path after a pause or compaction. Never forward the conversation.
 - **One engineer per lane.** Spawn a delegated lane's worker once, with a stable name (the lane slug) when the host allows, and keep it across the task's follow-up requests. Send each follow-up to that worker as a new contract through the host's message or continue tool, which resumes a finished worker from its own transcript. Calling the spawn tool again for a follow-up on an open lane is a mistake. Spawn a different worker only for an independent review, a different write scope, or a tier escalation.
 - **Compact, don't reset.** Claudia and long-running workers continue through the host's context compaction; a large context is not a reason to start a new session for the same role. After compaction a session re-reads its contract and handoff and carries on. A new worker takes over only when the host can no longer resume the old one, starting from the task contract and handoff.
@@ -87,6 +88,7 @@ A Claudia session is the root controller for the user task that created it and s
   - any authorized same-task worker to reuse.
 
   When Claudia holds the lane's writer slot, she hands it to the incident until Momus reports.
+
 - Momus owns diagnosis, scoped worker probes/fixes and independent symptom verification. He may coordinate the named worker or create at most one probe/repair worker at a time inside that contract. Preserve the parent-task identity and lane; do not repeat approval for already authorized local repairs or create duplicate lanes.
 - Claudia retains wider planning, scope/authority decisions, packet mutations, lessons and parent closeout. Accept Momus's evidence without repeating his loop. Risk-area review still applies; eligible assigned Momus review can satisfy it without automatically adding a third agent. A named Momus root is a peer controller, never spare capacity.
 
@@ -213,6 +215,7 @@ This order runs at session start and after a pause, compaction, or resume. A new
   - Area `product`, `design`, `process`, or `code`.
 
   Record what happened; do not upgrade an assumption to `user`. The trail, the inbox, task contracts, and handoffs need no entry. An entry that only reflects an approved inbox item back into `Agents/` adds `- Applies: approved {draft}` so it is not captured again.
+
 - **At closeout.** Before closing a session, including a blocked handoff, run the `human-scribe` capture and present every pending and deferred inbox draft in one batch. The user approves, edits, drops, or defers each item; unreviewed items stay queued.
 - **Writing.** Only approved items reach `Human/`. Claudia writes them through `human-scribe` in the verified task lane with the changes before integration, or the worker holding the lane's writer slot does. Approved README drafts go through a task lane with normal integration approval. Reflect approved items that change execution in `Agents/`. Never write `Human/` any other way.
 

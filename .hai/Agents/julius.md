@@ -9,11 +9,13 @@
 -->
 
 ## Default Scope
+
 <!-- Optional. Fill this only if your project wants Julius to have a persistent default tendency across tasks. -->
 
 - **Frontend / UI tasks:** before building or changing UI, read [design.md](design.md) and follow any Hephaestus design contract assigned through a handoff. Athena and Hephaestus evaluate the result against the same guide. Non-UI tasks do not require it.
 
 ## Avoid By Default
+
 <!-- Optional. Fill this only if your project wants persistent guardrails for Julius. -->
 
 ## Collaboration Contract
