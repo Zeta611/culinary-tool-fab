@@ -7,3 +7,6 @@ bun.lockb
 
 # Miscellaneous
 /static/
+
+# HAI-Harness core files (managed by the harness; do not reformat)
+/.hai/

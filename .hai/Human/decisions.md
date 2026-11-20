@@ -1,5 +1,4 @@
 # Decisions
-
 Version: current
 
 <!--

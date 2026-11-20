@@ -29,8 +29,8 @@ Priority options: `P0` (must now), `P1` (soon), `P2` (nice), `P3` (maybe).
 
 ## 2. Backlog
 
-| ID  | Title | Type | Priority | Status | Owner | Notes / Links |
-| --- | ----- | ---- | -------- | ------ | ----- | ------------- |
+| ID | Title | Type | Priority | Status | Owner | Notes / Links |
+| --- | --- | --- | --- | --- | --- | --- |
 
 ## 3. Active Queue
 
@@ -88,7 +88,7 @@ Assigned queue for Julius: Not assigned.
 ## 4. Bugs (optional detail)
 
 | Bug ID | Title | Severity | Status | Repro steps | Notes |
-| ------ | ----- | -------- | ------ | ----------- | ----- |
+| --- | --- | --- | --- | --- | --- |
 
 ## 5. Feature Ideas / Roadmap
 
