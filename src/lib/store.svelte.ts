@@ -17,5 +17,5 @@ export const store = $state({
     const url = inputImages.get(nodeId);
     if (url) URL.revokeObjectURL(url);
     inputImages.delete(nodeId);
-  },
+  }
 });

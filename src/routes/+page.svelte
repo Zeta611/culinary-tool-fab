@@ -7,7 +7,7 @@
     Position,
     SvelteFlow
   } from '@xyflow/svelte';
-  import '@xyflow/svelte/xy-theme.css';
+  import '@xyflow/svelte/dist/style.css';
   import { store } from '#lib/store.svelte.ts';
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
@@ -178,14 +178,16 @@
     fitView
     proOptions={{ hideAttribution: true }}
   >
-    <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+    <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
     <Panel position="bottom-center">
-      <ul class="steps">
-        <li class="step step-primary">Inspirations</li>
-        <li class="step step-primary">Image Preview</li>
-        <li class="step">Tangible Parts</li>
-        <li class="step">Tool Design</li>
-        <li class="step">Culinary Prototype</li>
+      <ul
+        class="steps rounded-box border border-base-content/10 bg-base-200 px-4 py-2 text-xs shadow-sm"
+      >
+        <li class="step step-neutral">Inspirations</li>
+        <li class="step step-neutral font-medium">Image Preview</li>
+        <li class="step text-base-content/50">Tangible Parts</li>
+        <li class="step text-base-content/50">Tool Design</li>
+        <li class="step text-base-content/50">Culinary Prototype</li>
       </ul>
     </Panel>
     <Controls />

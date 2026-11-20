@@ -21,7 +21,9 @@
   }
 </script>
 
-<div class="flex flex-col items-center gap-2">
+<div
+  class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
+>
   <button
     title="inspiration image input"
     type="button"
@@ -29,9 +31,9 @@
     onclick={() => dialog.showModal()}
   >
     {#if previewUrl === null}
-      <div class="h-48 w-64 skeleton"></div>
+      <div class="h-23 w-33 bg-base-300"></div>
     {:else}
-      <img src={previewUrl} alt="Inspiration preview" class="h-48 w-64 rounded object-cover" />
+      <img src={previewUrl} alt="Inspiration preview" class="h-23 w-33 object-cover" />
     {/if}
   </button>
   <Handle type="source" position={Position.Right} />
@@ -42,9 +44,9 @@
     <h3 class="text-lg font-bold">Upload an image</h3>
     <div class="flex flex-col items-center gap-3">
       {#if previewUrl === null}
-        <div class="h-48 w-64 skeleton"></div>
+        <div class="size-40 rounded-box bg-base-300"></div>
       {:else}
-        <img src={previewUrl} alt="Selected inspiration" />
+        <img src={previewUrl} alt="Selected inspiration" class="size-40 rounded-box object-cover" />
       {/if}
 
       <input
