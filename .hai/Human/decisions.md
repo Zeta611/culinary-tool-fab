@@ -22,4 +22,8 @@ Archive or reset this file before changing the version header convention.
 
 ## Decisions
 
-- None recorded yet.
+- Date: 2026-11-20
+- Decision: Keep the designer's neutral canvas look, but implement it with daisyUI (themes `ctf`/`ctf-dark` in `src/routes/layout.css`). No custom design-token CSS, no class-only wrapper components, no filler text in nodes; stage progress uses daisyUI `steps`.
+- Why: Jay maintains the styling in daisyUI; the custom design system added wrapper overhead.
+- Tradeoffs: Look values now live only in the daisyUI theme blocks.
+- Follow-up: Agent rules are in `.hai/Agents/design.md` and `project_context.md`.

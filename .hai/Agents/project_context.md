@@ -41,7 +41,7 @@ Shared high-level context for all agents. This file is intentionally architectur
 ## 4. Durable Technical Shape
 
 - Platform(s), runtime(s), or environment(s) only if they affect design decisions:
-- Major technologies or stack choices only if they are architecturally important:
+- Major technologies or stack choices only if they are architecturally important: SvelteKit + Svelte 5, Svelte Flow (`@xyflow/svelte`), Tailwind CSS v4 + daisyUI 5. pnpm. Prettier formatting is enforced in CI (`pnpm format:check`).
 - Main data, state, or storage owners:
 - External systems or dependencies that materially constrain the project:
 
@@ -58,9 +58,9 @@ Shared high-level context for all agents. This file is intentionally architectur
 
 ## 6. Core Project Rules
 
-- Rule:
-- Rule:
-- Rule:
+- Rule: Style UI with daisyUI components and theme colors; the visual look lives in the daisyUI themes in `src/routes/layout.css`. See [design.md](design.md).
+- Rule: Keep code lean. No wrapper components or modules that only rename or add classes to a native element; inline them. Abstract only for real behavior or reuse.
+- Rule: Don't reformat `.hai/` (it is in `.prettierignore`); harness core files are managed by HAI-Harness.
 - Read, query, preview, or inspection paths should stay side-effect free when that is a system requirement.
 - If degraded or offline operation matters for this project, preserve a usable failure mode when dependencies are unavailable.
 

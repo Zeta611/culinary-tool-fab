@@ -1,56 +1,49 @@
 # Design Guide
 
-Concrete visual language for Culinary Tool Fab. **Full agent-facing style guide:** [`src/lib/design/STYLE_GUIDE.md`](../../src/lib/design/STYLE_GUIDE.md).
-
-Adopted from Dish Graph’s canvas look (visual style only). Product behavior stays Culinary Tool Fab / Svelte Flow.
+Visual language for Culinary Tool Fab. Read before any UI work.
 
 ## Overview
 
-- Surface: full-viewport Svelte Flow canvas
-- Intent: calm, precise tool canvas — neutrals, blue accent, card nodes, 20px dot grid
-- Theme: system light/dark via `prefers-color-scheme`
-- Implementation: `src/lib/design/*` tokens + `src/lib/components/ui/*`
+- Surface: full-viewport Svelte Flow canvas.
+- Look (designer's choice, keep it): calm neutral canvas, blue accent, bordered card nodes, 20px dot grid, Geist font, system light/dark.
+- Implementation: **Tailwind + daisyUI**. The look lives in the daisyUI themes `ctf` / `ctf-dark` in `src/routes/layout.css`.
 
-## Color system
+## Rules
 
-Source: `src/lib/design/colors.ts` → CSS `src/lib/design/tokens.css` (`--ctf-*`).
+- **Style with daisyUI components and theme colors.** Use `card`, `btn`, `file-input`, `modal`, `steps`, etc., and theme utilities (`bg-base-200`, `text-base-content/50`, `border-primary`). No custom design-token CSS files, no `--ctf-*`-style variables, no one-off hex.
+- **Change colors, radii and borders only in the daisyUI theme blocks** in `layout.css`, for both `ctf` and `ctf-dark`.
+- **No wrapper components that only add classes** (e.g. a component that just wraps `<input>` or a `<div>` with a class). Write the markup inline. Extract a component only when it carries real behavior or is reused with real logic.
+- **No filler text in nodes** (kind headers like "IMAGE"/"STAGE", "Placeholder" captions). Show text only when it carries real data.
+- **Stage progress uses daisyUI `steps`**, not custom pills.
+- The only custom CSS allowed is the `.svelte-flow { --xy-* }` variable mapping in `layout.css` (Svelte Flow has no daisyUI component). Map to daisyUI theme variables.
+- Import Svelte Flow's base `@xyflow/svelte/dist/style.css`, not `xy-theme.css` (that theme adds padding and a border around every custom node).
 
-| Role | Light | Dark | Use |
-| --- | --- | --- | --- |
-| `bg` | `#ffffff` | `#0a0a0a` | Canvas |
-| `surface` | `#fafafa` | `#111111` | Panels |
-| `surface-2` | `#f2f2f2` | `#1a1a1a` | Media fill |
-| `border` | `#eaeaea` | `#2e2e2e` | Hairlines / grid |
-| `border-strong` | `#c9c9c9` | `#454545` | Outlines |
-| `text` | `#171717` | `#ededed` | Primary |
-| `secondary` | `#4d4d4d` | `#a0a0a0` | Body |
-| `faint` | `#8f8f8f` | `#8f8f8f` | Labels |
-| `accent` | `#006bff` | `#47a8ff` | Selection / handles |
-| `accent-soft` | `#e9f2ff` | `#0f2340` | Selection halo |
-| `edge` | `#c9c9c9` | `#454545` | Edges |
+## Recipes
 
-## Font system
+Node card (selection ring via Svelte Flow's `.selected` parent):
 
-Source: `src/lib/design/fonts.ts`. Load with `<FontLinks />`.
+```svelte
+<div
+  class="card overflow-hidden card-border border-base-content/20 bg-base-100 shadow-sm in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
+>
+  <div class="size-40 bg-base-300"></div>
+  <Handle type="target" position={Position.Left} />
+  <Handle type="source" position={Position.Right} />
+</div>
+```
 
-- UI: Geist → `--ctf-font`
-- Mono: Geist Mono → `--ctf-font-mono`
-- Body 14/20; kind 10px uppercase; node body 12/16; walk pills 12/16
+Stage progress:
 
-## Components
+```svelte
+<ul class="steps rounded-box border border-base-content/10 bg-base-200 px-4 py-2 text-xs shadow-sm">
+  <li class="step step-neutral">Done</li>
+  <li class="step step-neutral font-medium">Current</li>
+  <li class="step text-base-content/50">Todo</li>
+</ul>
+```
 
-Import from `#lib` / `#lib/components/ui`:
+Canvas: `<Background variant={BackgroundVariant.Dots} gap={20} size={1} />`.
 
-| Component | Use |
-| --- | --- |
-| `FlowNodeCard` | Node card + kind |
-| `FlowNodeMedia` | Media / placeholder |
-| `FlowNodeBody` | Body copy |
-| `FlowFileInput` | File picker chrome |
-| `WalkStrip` | Stage pills |
-| `FontLinks` | Geist CDN links |
+## Out of scope
 
-## Do's and Don'ts
-
-- **Do:** Extend `colors.ts` / `fonts.ts` / UI components; follow `STYLE_GUIDE.md`.
-- **Don't:** One-off hex, daisyUI skeleton chrome, or Dish Graph feature ports for a visual pass.
+Dish Graph product features (guided walkthrough, pro mode, connect tool, 3D viewer) unless explicitly requested.

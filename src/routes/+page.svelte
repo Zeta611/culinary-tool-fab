@@ -7,11 +7,10 @@
     Position,
     SvelteFlow
   } from '@xyflow/svelte';
-  import '@xyflow/svelte/xy-theme.css';
+  import '@xyflow/svelte/dist/style.css';
   import { store } from '#lib/store.svelte.ts';
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
-  import { WalkStrip } from '#lib/components/ui/index.js';
 
   const nodeTypes = {
     imageInputNode: ImageInputNode,
@@ -181,15 +180,15 @@
   >
     <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
     <Panel position="bottom-center">
-      <WalkStrip
-        steps={[
-          { label: 'Inspirations', state: 'done' },
-          { label: 'Image Preview', state: 'current' },
-          { label: 'Tangible Parts' },
-          { label: 'Tool Design' },
-          { label: 'Culinary Prototype' }
-        ]}
-      />
+      <ul
+        class="steps rounded-box border border-base-content/10 bg-base-200 px-4 py-2 text-xs shadow-sm"
+      >
+        <li class="step step-neutral">Inspirations</li>
+        <li class="step step-neutral font-medium">Image Preview</li>
+        <li class="step text-base-content/50">Tangible Parts</li>
+        <li class="step text-base-content/50">Tool Design</li>
+        <li class="step text-base-content/50">Culinary Prototype</li>
+      </ul>
     </Panel>
     <Controls />
   </SvelteFlow>
