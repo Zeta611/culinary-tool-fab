@@ -4,21 +4,13 @@
 
   let { id, data: _data }: NodeProps = $props();
 
-  let previewUrl = $state<string | null>(null);
+  const previewUrl = $derived(store.inputImages.get(id) ?? null);
 
   function handleFileChange(e: Event & { currentTarget: HTMLInputElement }) {
     const file = e.currentTarget.files?.[0];
     if (!file || !file.type.startsWith('image/')) return;
-    previewUrl = URL.createObjectURL(file);
-    store.inputImages.set(id, previewUrl);
+    store.setInputImage(id, file);
   }
-
-  // $effect(() => {
-  //   const url = previewUrl;
-  //   return () => {
-  //     if (url) URL.revokeObjectURL(url);
-  //   };
-  // });
 
   let dialog: HTMLDialogElement;
 
@@ -55,7 +47,12 @@
         <img src={previewUrl} alt="Selected inspiration" />
       {/if}
 
-      <input type="file" class="file-input file-input-sm" onchange={handleFileChange} />
+      <input
+        type="file"
+        accept="image/*"
+        class="file-input file-input-sm"
+        onchange={handleFileChange}
+      />
     </div>
     <div class="modal-action">
       <form method="dialog">

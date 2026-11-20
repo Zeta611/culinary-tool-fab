@@ -8,6 +8,7 @@
     SvelteFlow
   } from '@xyflow/svelte';
   import '@xyflow/svelte/xy-theme.css';
+  import { store } from '#lib/store.svelte.ts';
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
 
@@ -171,6 +172,7 @@
   <SvelteFlow
     bind:nodes
     bind:edges
+    ondelete={({ nodes }) => nodes.forEach((n) => store.removeInputImage(n.id))}
     {nodeTypes}
     nodeOrigin={[0.5, 0.5]}
     fitView
