@@ -1,8 +1,9 @@
 <script lang="ts">
-  import { Handle, Position, type NodeProps } from '@xyflow/svelte';
+  import { Handle, type NodeProps, Position } from '@xyflow/svelte';
+
   import { store } from '#lib/store.svelte.ts';
 
-  let { id, data: _data }: NodeProps = $props();
+  let { id }: NodeProps = $props();
 
   const previewUrl = $derived(store.inputImages.get(id) ?? null);
 

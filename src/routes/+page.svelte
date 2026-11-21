@@ -1,4 +1,6 @@
 <script lang="ts">
+  import '@xyflow/svelte/dist/style.css';
+
   import {
     Background,
     BackgroundVariant,
@@ -7,10 +9,10 @@
     Position,
     SvelteFlow
   } from '@xyflow/svelte';
-  import '@xyflow/svelte/dist/style.css';
-  import { store } from '#lib/store.svelte.ts';
+
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
+  import { store } from '#lib/store.svelte.ts';
 
   const nodeTypes = {
     imageInputNode: ImageInputNode,
