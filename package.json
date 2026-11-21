@@ -11,12 +11,19 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
-    "prepare": "svelte-kit sync || echo ''",
+    "prepare": "husky",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
     "format": "eslint --fix .; prettier --write .",
     "format:check": "prettier --check ."
+  },
+  "lint-staged": {
+    "*.{js,ts,svelte}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json,md,html}": "prettier --write"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -32,6 +39,8 @@
     "eslint-plugin-simple-import-sort": "^14.0.0",
     "eslint-plugin-svelte": "^3.24.1",
     "globals": "^17.14.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.1",
     "prettier": "^3.10.1",
     "prettier-plugin-svelte": "^4.1.1",
     "prettier-plugin-tailwindcss": "^0.8.1",
