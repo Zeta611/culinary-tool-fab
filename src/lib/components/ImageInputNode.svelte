@@ -37,8 +37,8 @@
       <img src={previewUrl} alt="Inspiration preview" class="h-23 w-33 object-cover" />
     {/if}
   </button>
-  <Handle type="source" position={Position.Right} />
 </div>
+<Handle type="source" position={Position.Right} />
 
 <dialog bind:this={dialog} class="modal" {@attach portal}>
   <div class="modal-box">
