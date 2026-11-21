@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Handle, type NodeProps, Position } from '@xyflow/svelte';
 
-  import { store } from '#lib/store.svelte.ts';
+  import { store } from '#lib/core.svelte.ts';
 
   let { id }: NodeProps = $props();
 

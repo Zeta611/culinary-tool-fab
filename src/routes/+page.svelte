@@ -12,7 +12,7 @@
 
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
-  import { store } from '#lib/store.svelte.ts';
+  import { store } from '#lib/core.svelte.ts';
 
   const nodeTypes = {
     imageInputNode: ImageInputNode,

@@ -1,5 +1,8 @@
 <script lang="ts">
-  import { Handle, Position } from '@xyflow/svelte';
+  import { Handle, type NodeProps, Position } from '@xyflow/svelte';
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const props: NodeProps = $props();
 </script>
 
 <div
