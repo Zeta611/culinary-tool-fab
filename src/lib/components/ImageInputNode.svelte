@@ -28,7 +28,7 @@
   <button
     title="inspiration image input"
     type="button"
-    class="nodrag cursor-pointer"
+    class="cursor-pointer"
     onclick={() => dialog.showModal()}
   >
     {#if previewUrl === null}
