@@ -11,11 +11,13 @@
   } from '@xyflow/svelte';
 
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
+  import ImagePreviewNode from '#lib/components/ImagePreviewNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
   import { store } from '#lib/core.svelte.ts';
 
   const nodeTypes = {
     imageInputNode: ImageInputNode,
+    imagePreviewNode: ImagePreviewNode,
     placeholderNode: PlaceholderNode
   };
 
@@ -34,7 +36,7 @@
     },
     {
       id: 'preview',
-      type: 'placeholderNode',
+      type: 'imagePreviewNode',
       position: { x: 400, y: 150 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
@@ -181,6 +183,7 @@
     proOptions={{ hideAttribution: true }}
   >
     <Background variant={BackgroundVariant.Dots} gap={20} size={1} />
+
     <Panel position="bottom-center">
       <ul
         class="steps rounded-box border border-base-content/10 bg-base-200 px-4 py-2 text-xs shadow-sm"

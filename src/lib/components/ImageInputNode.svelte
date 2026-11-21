@@ -5,7 +5,7 @@
 
   let { id }: NodeProps = $props();
 
-  const previewUrl = $derived(store.inputImages.get(id) ?? null);
+  const imageURL = $derived(store.inputImages.get(id)?.objectURL);
 
   function handleFileChange(e: Event & { currentTarget: HTMLInputElement }) {
     const file = e.currentTarget.files?.[0];
@@ -22,19 +22,22 @@
   }
 </script>
 
+{#snippet placeholder()}
+  <div class="size-40 rounded-box bg-base-300"></div>
+{/snippet}
+
+{#snippet inputImage(imageURL: string)}
+  <img src={imageURL} alt="Inspiration input" class="size-40 rounded-box object-cover" />
+{/snippet}
+
 <div
   class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
 >
-  <button
-    title="inspiration image input"
-    type="button"
-    class="cursor-pointer"
-    onclick={() => dialog.showModal()}
-  >
-    {#if previewUrl === null}
-      <div class="h-23 w-33 bg-base-300"></div>
+  <button class="cursor-pointer" title="inspiration image input" onclick={() => dialog.showModal()}>
+    {#if imageURL}
+      {@render inputImage(imageURL)}
     {:else}
-      <img src={previewUrl} alt="Inspiration preview" class="h-23 w-33 object-cover" />
+      {@render placeholder()}
     {/if}
   </button>
 </div>
@@ -44,10 +47,10 @@
   <div class="modal-box">
     <h3 class="text-lg font-bold">Upload an image</h3>
     <div class="flex flex-col items-center gap-3">
-      {#if previewUrl === null}
-        <div class="size-40 rounded-box bg-base-300"></div>
+      {#if imageURL}
+        {@render inputImage(imageURL)}
       {:else}
-        <img src={previewUrl} alt="Selected inspiration" class="size-40 rounded-box object-cover" />
+        {@render placeholder()}
       {/if}
 
       <input

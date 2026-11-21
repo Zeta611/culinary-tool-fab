@@ -226,3 +226,6 @@ tags
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/direnv,svelte,node,macos,visualstudiocode,vim
+
+# Personal Claude Code instructions
+CLAUDE.local.md
