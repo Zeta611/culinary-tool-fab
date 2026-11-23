@@ -40,42 +40,43 @@
       {@render placeholder()}
     {/if}
   </button>
+
+  <!-- nest the dialog to fix HMR -->
+  <dialog bind:this={dialog} class="modal" {@attach portal}>
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Generated image</h3>
+      <div class="flex flex-col items-center gap-3">
+        {#if imageURL && generatePromise === null}
+          {@render previewImage(imageURL)}
+        {:else if generatePromise}
+          {#await generatePromise}
+            <div class="size-40 skeleton rounded-box bg-base-300"></div>
+          {:then}
+            {@render previewImage(imageURL!)}
+          {:catch}
+            Image generation error
+          {/await}
+        {:else}
+          {@render placeholder()}
+        {/if}
+
+        <button
+          class="btn btn-primary"
+          onclick={() => {
+            generatePromise = onclickGenerate();
+          }}
+        >
+          Generate
+        </button>
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 </div>
 <Handle type="target" position={Position.Left} />
 <Handle type="source" position={Position.Right} />
-
-<dialog bind:this={dialog} class="modal" {@attach portal}>
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">Generated image</h3>
-    <div class="flex flex-col items-center gap-3">
-      {#if imageURL && generatePromise === null}
-        {@render previewImage(imageURL)}
-      {:else if generatePromise}
-        {#await generatePromise}
-          <div class="size-40 skeleton rounded-box bg-base-300"></div>
-        {:then}
-          {@render previewImage(imageURL!)}
-        {:catch}
-          Image generation error
-        {/await}
-      {:else}
-        {@render placeholder()}
-      {/if}
-
-      <button
-        class="btn btn-primary"
-        onclick={() => {
-          generatePromise = onclickGenerate();
-        }}
-      >
-        Generate
-      </button>
-    </div>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>

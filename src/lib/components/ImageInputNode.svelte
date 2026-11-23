@@ -40,31 +40,32 @@
       {@render placeholder()}
     {/if}
   </button>
+
+  <!-- nest the dialog to fix HMR -->
+  <dialog bind:this={dialog} class="modal" {@attach portal}>
+    <div class="modal-box">
+      <h3 class="text-lg font-bold">Upload an image</h3>
+      <div class="flex flex-col items-center gap-3">
+        {#if imageURL}
+          {@render inputImage(imageURL)}
+        {:else}
+          {@render placeholder()}
+        {/if}
+
+        <input
+          type="file"
+          accept="image/*"
+          class="file-input file-input-sm"
+          onchange={handleFileChange}
+        />
+      </div>
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button, it will close the modal -->
+          <button class="btn">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 </div>
 <Handle type="source" position={Position.Right} />
-
-<dialog bind:this={dialog} class="modal" {@attach portal}>
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">Upload an image</h3>
-    <div class="flex flex-col items-center gap-3">
-      {#if imageURL}
-        {@render inputImage(imageURL)}
-      {:else}
-        {@render placeholder()}
-      {/if}
-
-      <input
-        type="file"
-        accept="image/*"
-        class="file-input file-input-sm"
-        onchange={handleFileChange}
-      />
-    </div>
-    <div class="modal-action">
-      <form method="dialog">
-        <!-- if there is a button, it will close the modal -->
-        <button class="btn">Close</button>
-      </form>
-    </div>
-  </div>
-</dialog>

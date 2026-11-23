@@ -32,6 +32,7 @@
     "@sveltejs/kit": "^3.2.0",
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
     "@tailwindcss/vite": "^4.3.5",
+    "@types/hyphen": "^1.14.0",
     "@types/node": "^24",
     "daisyui": "^5.8.1",
     "eslint": "^10.15.0",
@@ -57,6 +58,7 @@
     "@openrouter/ai-sdk-provider": "^3.1.0",
     "@xyflow/svelte": "^2.0.2",
     "ai": "^7.0.177",
+    "hyphen": "^1.14.1",
     "valibot": "^1.5.0"
   }
 }

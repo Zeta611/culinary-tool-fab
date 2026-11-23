@@ -33,10 +33,10 @@ export const generateImagePreview = command(
       ),
       v.maxLength(MAX_IMAGES, 'Too many images')
     ),
-    prompts: v.array(v.pipe(v.string(), v.trim()))
+    texts: v.array(v.pipe(v.string(), v.trim()))
   }),
-  async ({ images, prompts }) => {
-    if (images.length === 0 && prompts.length === 0) throw new Error('Provide an input');
+  async ({ images, texts }) => {
+    if (images.length === 0 && texts.length === 0) throw new Error('Provide an input');
     if (images.length > MAX_IMAGES) throw new Error('Too many images');
 
     const result = await generateText({
@@ -45,7 +45,7 @@ export const generateImagePreview = command(
         {
           role: 'user',
           content: [
-            { type: 'text', text: prompts.join('\n') },
+            { type: 'text', text: texts.join('\n') },
             ...images.map((image) => ({ type: 'image' as const, image })) // data URLs
           ]
         }

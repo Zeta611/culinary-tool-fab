@@ -5,7 +5,7 @@ import * as ai from '#lib/ai.remote.ts';
 type ImageFile = { image: File; objectURL: string };
 
 const inputImages = new SvelteMap<string, ImageFile>();
-const inputPrompts = new SvelteMap<string, string>();
+const inputTexts = new SvelteMap<string, string>();
 let imagePreview: ImageFile | null = $state.raw(null);
 
 function fileToDataURL(file: Blob): Promise<string> {
@@ -22,7 +22,7 @@ export async function generateImagePreview() {
     images: await Promise.all(
       inputImages.values().map(async ({ image }) => await fileToDataURL(image))
     ),
-    prompts: ['food inspired by these images']
+    texts: inputTexts.values().toArray()
   });
   const image = new File([bytes], 'preview', { type: mediaType });
 
@@ -47,16 +47,16 @@ export const store = {
     inputImages.delete(id);
   },
 
-  get inputPrompts() {
-    return inputPrompts;
+  get inputTexts() {
+    return inputTexts;
   },
 
-  setInputPrompt(id: string, prompt: string) {
-    inputPrompts.set(id, prompt);
+  setInputText(id: string, text: string) {
+    inputTexts.set(id, text);
   },
 
-  removeInputPrompt(id: string) {
-    inputPrompts.delete(id);
+  removeInputText(id: string) {
+    inputTexts.delete(id);
   },
 
   get imagePreview() {

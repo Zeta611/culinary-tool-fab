@@ -13,10 +13,12 @@
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import ImagePreviewNode from '#lib/components/ImagePreviewNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
+  import TextInputNode from '#lib/components/TextInputNode.svelte';
   import { store } from '#lib/core.svelte.ts';
 
   const nodeTypes = {
     imageInputNode: ImageInputNode,
+    textInputNode: TextInputNode,
     imagePreviewNode: ImagePreviewNode,
     placeholderNode: PlaceholderNode
   };
@@ -32,6 +34,12 @@
       id: 'input2',
       type: 'imageInputNode',
       position: { x: 0, y: 300 },
+      data: {}
+    },
+    {
+      id: 'input3',
+      type: 'textInputNode',
+      position: { x: 0, y: 600 },
       data: {}
     },
     {
@@ -114,6 +122,13 @@
       target: 'preview',
       animated: true,
       label: 'sketch'
+    },
+    {
+      id: 'input3-preview',
+      source: 'input3',
+      target: 'preview',
+      animated: true,
+      label: 'text'
     },
     {
       id: 'preview-part1',
