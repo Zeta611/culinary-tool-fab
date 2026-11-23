@@ -23,6 +23,10 @@ function fileToDataURL(file: Blob): Promise<string> {
 
 let generatingImagePreview = $state(false);
 
+export function isGeneratingImagePreview() {
+  return generatingImagePreview;
+}
+
 export function canGenerateImagePreview() {
   return !generatingImagePreview && hasInputs();
 }

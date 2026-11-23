@@ -29,10 +29,10 @@
 {/snippet}
 
 <div
-  class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
+  class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm transition-[translate] duration-200 ease-out card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20 motion-safe:hover:-translate-y-0.5"
 >
   <button
-    class="cursor-pointer"
+    class="group relative block cursor-pointer"
     title="Edit image inspiration"
     aria-label="Edit image inspiration"
     onclick={() => dialog.showModal()}
@@ -42,6 +42,12 @@
     {:else}
       {@render placeholder()}
     {/if}
+    <span
+      class="absolute right-1.5 bottom-1.5 grid size-6 place-items-center rounded-full bg-base-100 text-base-content/70 opacity-0 shadow-sm transition-opacity group-hover:opacity-100 group-focus-visible:opacity-100"
+      aria-hidden="true"
+    >
+      <span class="icon-[hugeicons--pencil-edit-02] text-sm"></span>
+    </span>
   </button>
 
   <InputNodeDialog

@@ -18,6 +18,17 @@
   const props: ImageProps | TextProps = $props();
 
   let dialog: HTMLDialogElement;
+  let fileInput: HTMLInputElement | undefined = $state();
+  let dragging = $state(false);
+
+  function handleDrop(e: DragEvent) {
+    e.preventDefault();
+    dragging = false;
+    const files = e.dataTransfer?.files;
+    if (!fileInput || !files?.length) return;
+    fileInput.files = files;
+    fileInput.dispatchEvent(new Event('change', { bubbles: true }));
+  }
 
   let draft = $state('');
   const canSave = $derived(draft.trim() !== '');
@@ -48,20 +59,36 @@
     </h3>
 
     {#if props.type === 'image'}
-      <div class="flex flex-col items-center gap-4">
+      <label
+        class={[
+          'flex cursor-pointer flex-col items-center gap-3 rounded-box border-2 border-dashed p-5 transition-colors has-focus-visible:border-primary',
+          dragging
+            ? 'border-primary bg-primary/5'
+            : 'border-base-content/15 hover:border-primary/50 hover:bg-base-200'
+        ]}
+        ondragenter={(e) => {
+          e.preventDefault();
+          dragging = true;
+        }}
+        ondragover={(e) => e.preventDefault()}
+        ondragleave={(e) => {
+          if (!e.currentTarget.contains(e.relatedTarget as Node | null)) dragging = false;
+        }}
+        ondrop={handleDrop}
+      >
         {#if props.imageURL}
           {@render props.imageInput(props.imageURL)}
         {:else}
           {@render props.placeholder()}
         {/if}
-
         <input
+          bind:this={fileInput}
           type="file"
           accept="image/*"
-          class="file-input w-full"
+          class="sr-only"
           onchange={props.handleFileChange}
         />
-      </div>
+      </label>
     {:else}
       <form
         class="flex flex-col gap-4"

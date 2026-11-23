@@ -227,10 +227,10 @@
 
     <Panel position="bottom-center">
       <ul
-        class="steps rounded-box border border-base-content/10 bg-base-200 px-4 py-2 text-xs shadow-sm"
+        class="steps rounded-full border border-base-content/10 bg-base-100/80 px-6 py-2.5 text-xs shadow-sm backdrop-blur-md"
       >
         <li class="step step-neutral">Inspirations</li>
-        <li class="step step-neutral font-medium">Image Preview</li>
+        <li class="step step-neutral font-medium" aria-current="step">Image Preview</li>
         <li class="step text-base-content/50">Tangible Parts</li>
         <li class="step text-base-content/50">Tool Design</li>
         <li class="step text-base-content/50">Culinary Prototype</li>

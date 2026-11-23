@@ -1,15 +1,18 @@
 <script lang="ts">
   import { Handle, type NodeProps, Position } from '@xyflow/svelte';
+  import type { ClassValue } from 'svelte/elements';
 
-  import { canGenerateImagePreview, generateImagePreview, store } from '#lib/core.svelte.ts';
+  import {
+    canGenerateImagePreview,
+    generateImagePreview,
+    isGeneratingImagePreview,
+    store
+  } from '#lib/core.svelte.ts';
 
   // eslint-disable-next-line no-empty-pattern
   let {}: NodeProps = $props();
 
   let generatePromise: Promise<void> | null = $state(null);
-  async function onclickGenerate() {
-    await generateImagePreview();
-  }
 
   const imageURL = $derived(store.imagePreview?.objectURL);
 
@@ -22,29 +25,34 @@
   }
 </script>
 
-{#snippet placeholder()}
-  <div class="grid size-40 place-items-center rounded-box bg-base-300 text-base-content/30">
+{#snippet placeholder(cls: ClassValue)}
+  <div class={['grid place-items-center rounded-box bg-base-300 text-base-content/30', cls]}>
     <span class="icon-[hugeicons--ai-image-01] text-4xl" aria-hidden="true"></span>
   </div>
 {/snippet}
 
-{#snippet previewImage(imageURL: string)}
-  <img src={imageURL} alt="Generated preview" class="size-40 rounded-box object-cover" />
+{#snippet previewImage(imageURL: string, cls: ClassValue)}
+  <img src={imageURL} alt="Generated preview" class={['rounded-box object-cover', cls]} />
 {/snippet}
 
 <div
-  class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
+  class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm transition-[translate] duration-200 ease-out card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20 motion-safe:hover:-translate-y-0.5"
 >
   <button
-    class="cursor-pointer"
+    class="relative block cursor-pointer"
     title="Open image preview"
     aria-label="Open image preview"
     onclick={() => dialog.showModal()}
   >
     {#if imageURL}
-      {@render previewImage(imageURL)}
+      {@render previewImage(imageURL, 'size-40')}
     {:else}
-      {@render placeholder()}
+      {@render placeholder('size-40')}
+    {/if}
+    {#if isGeneratingImagePreview()}
+      <span class="absolute inset-0 grid place-items-center bg-base-100/60 backdrop-blur-sm">
+        <span class="loading loading-md loading-spinner"></span>
+      </span>
     {/if}
   </button>
 
@@ -53,31 +61,36 @@
       <h3 class="pr-8 text-lg font-semibold">Generated image</h3>
       <div class="flex flex-col items-center gap-4">
         {#if imageURL && generatePromise === null}
-          {@render previewImage(imageURL)}
+          {@render previewImage(imageURL, 'aspect-square w-full')}
         {:else if generatePromise}
           {#await generatePromise}
-            <div class="size-40 skeleton rounded-box bg-base-300"></div>
+            <div class="aspect-square w-full skeleton rounded-box bg-base-300"></div>
           {:then}
-            {@render previewImage(imageURL!)}
+            {@render previewImage(imageURL!, 'aspect-square w-full')}
           {:catch}
-            <div role="alert" class="alert alert-soft alert-error">
+            <div role="alert" class="alert w-full alert-soft alert-error">
               <span class="icon-[hugeicons--alert-circle] text-lg" aria-hidden="true"></span>
               Image generation failed. Try again.
             </div>
           {/await}
         {:else}
-          {@render placeholder()}
+          {@render placeholder('aspect-square w-full')}
         {/if}
 
         <button
-          class="btn btn-primary"
+          class="btn w-full btn-primary"
           disabled={!canGenerateImagePreview()}
           onclick={() => {
-            generatePromise = onclickGenerate();
+            generatePromise = generateImagePreview();
           }}
         >
-          <span class="icon-[hugeicons--ai-auto-rotate] text-lg" aria-hidden="true"></span>
-          Generate
+          {#if isGeneratingImagePreview()}
+            <span class="loading loading-sm loading-spinner" aria-hidden="true"></span>
+            Generating…
+          {:else}
+            <span class="icon-[hugeicons--ai-auto-rotate] text-lg" aria-hidden="true"></span>
+            {imageURL ? 'Regenerate' : 'Generate'}
+          {/if}
         </button>
       </div>
 
