@@ -10,42 +10,53 @@
     SvelteFlow
   } from '@xyflow/svelte';
 
+  import AddInputNode from '#lib/components/AddInputNode.svelte';
   import ImageInputNode from '#lib/components/ImageInputNode.svelte';
   import ImagePreviewNode from '#lib/components/ImagePreviewNode.svelte';
   import PlaceholderNode from '#lib/components/PlaceholderNode.svelte';
   import TextInputNode from '#lib/components/TextInputNode.svelte';
   import { store } from '#lib/core.svelte.ts';
+  import { setGraphContext } from '#lib/graph-context.ts';
 
   const nodeTypes = {
     imageInputNode: ImageInputNode,
     textInputNode: TextInputNode,
+    addInputNode: AddInputNode,
     imagePreviewNode: ImagePreviewNode,
     placeholderNode: PlaceholderNode
   };
 
+  const GAP_X = 400;
+  const GAP_Y = 300;
+
   let nodes = $state.raw([
-    {
-      id: 'input1',
+    ...store.imageInputs.entries().map(([id], i) => ({
+      id,
       type: 'imageInputNode',
-      position: { x: 0, y: 0 },
+      position: { x: 0, y: i * GAP_Y },
+      sourcePosition: Position.Right,
       data: {}
-    },
-    {
-      id: 'input2',
-      type: 'imageInputNode',
-      position: { x: 0, y: 300 },
-      data: {}
-    },
-    {
-      id: 'input3',
+    })),
+    ...store.textInputs.entries().map(([id], i) => ({
+      id,
       type: 'textInputNode',
-      position: { x: 0, y: 600 },
+      position: { x: 0, y: (store.imageInputs.size + i) * GAP_Y },
+      sourcePosition: Position.Right,
+      data: {}
+    })),
+    {
+      id: 'add-input',
+      type: 'addInputNode',
+      deletable: false,
+      position: { x: 0, y: (store.imageInputs.size + store.textInputs.size) * GAP_Y },
+      sourcePosition: Position.Right,
       data: {}
     },
     {
       id: 'preview',
       type: 'imagePreviewNode',
-      position: { x: 400, y: 150 },
+      deletable: false,
+      position: { x: GAP_X, y: 150 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -53,7 +64,8 @@
     {
       id: 'part1',
       type: 'placeholderNode',
-      position: { x: 800, y: -150 },
+      deletable: false,
+      position: { x: 2 * GAP_X, y: -150 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -61,7 +73,8 @@
     {
       id: 'part2',
       type: 'placeholderNode',
-      position: { x: 800, y: 150 },
+      deletable: false,
+      position: { x: 2 * GAP_X, y: 150 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -69,7 +82,8 @@
     {
       id: 'part3',
       type: 'placeholderNode',
-      position: { x: 800, y: 450 },
+      deletable: false,
+      position: { x: 2 * GAP_X, y: 450 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -77,7 +91,8 @@
     {
       id: 'tool1',
       type: 'placeholderNode',
-      position: { x: 1200, y: -150 },
+      deletable: false,
+      position: { x: 3 * GAP_X, y: -150 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -85,7 +100,8 @@
     {
       id: 'tool2',
       type: 'placeholderNode',
-      position: { x: 1200, y: 150 },
+      deletable: false,
+      position: { x: 3 * GAP_X, y: 150 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -93,7 +109,8 @@
     {
       id: 'tool3',
       type: 'placeholderNode',
-      position: { x: 1200, y: 450 },
+      deletable: false,
+      position: { x: 3 * GAP_X, y: 450 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -101,7 +118,8 @@
     {
       id: 'prototype',
       type: 'placeholderNode',
-      position: { x: 1600, y: 150 },
+      deletable: false,
+      position: { x: 4 * GAP_X, y: 150 },
       targetPosition: Position.Left,
       sourcePosition: Position.Right,
       data: {}
@@ -110,25 +128,10 @@
 
   let edges = $state.raw([
     {
-      id: 'input1-preview',
-      source: 'input1',
+      id: 'add-input-preview',
+      source: 'add-input',
       target: 'preview',
-      animated: true,
-      label: 'photo'
-    },
-    {
-      id: 'input2-preview',
-      source: 'input2',
-      target: 'preview',
-      animated: true,
-      label: 'sketch'
-    },
-    {
-      id: 'input3-preview',
-      source: 'input3',
-      target: 'preview',
-      animated: true,
-      label: 'text'
+      animated: true
     },
     {
       id: 'preview-part1',
@@ -185,13 +188,36 @@
       animated: true
     }
   ]);
+
+  function insertInputNode(id: string, type: 'imageInputNode' | 'textInputNode') {
+    const add = nodes.find((n) => n.id === 'add-input')!;
+    nodes = [
+      ...nodes.map((n) =>
+        n === add ? { ...n, position: { ...n.position, y: n.position.y + GAP_Y } } : n
+      ),
+      {
+        id,
+        type,
+        position: add.position,
+        sourcePosition: Position.Right,
+        data: {}
+      }
+    ];
+    edges = [...edges, { id: `${id}-preview`, source: id, target: 'preview', animated: true }];
+    return id;
+  }
+
+  setGraphContext({
+    addImageInput: (image) => insertInputNode(store.addImageInput(image), 'imageInputNode'),
+    addTextInput: (text) => insertInputNode(store.addTextInput(text), 'textInputNode')
+  });
 </script>
 
 <div class="h-screen w-screen">
   <SvelteFlow
     bind:nodes
     bind:edges
-    ondelete={({ nodes }) => nodes.forEach((n) => store.removeInputImage(n.id))}
+    ondelete={({ nodes }) => nodes.forEach((n) => store.removeInput(n.id))}
     {nodeTypes}
     nodeOrigin={[0.5, 0.5]}
     fitView

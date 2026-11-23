@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Handle, type NodeProps, Position } from '@xyflow/svelte';
 
-  import { generateImagePreview, store } from '#lib/core.svelte.ts';
+  import { canGenerateImagePreview, generateImagePreview, store } from '#lib/core.svelte.ts';
 
   // eslint-disable-next-line no-empty-pattern
   let {}: NodeProps = $props();
@@ -41,7 +41,6 @@
     {/if}
   </button>
 
-  <!-- nest the dialog to fix HMR -->
   <dialog bind:this={dialog} class="modal" {@attach portal}>
     <div class="modal-box">
       <h3 class="text-lg font-bold">Generated image</h3>
@@ -62,6 +61,7 @@
 
         <button
           class="btn btn-primary"
+          disabled={!canGenerateImagePreview}
           onclick={() => {
             generatePromise = onclickGenerate();
           }}

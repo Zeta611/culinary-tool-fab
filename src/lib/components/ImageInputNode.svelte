@@ -3,30 +3,26 @@
 
   import { store } from '#lib/core.svelte.ts';
 
+  import InputNodeDialog from './InputNodeDialog.svelte';
+
   let { id }: NodeProps = $props();
 
-  const imageURL = $derived(store.inputImages.get(id)?.objectURL);
+  const imageURL = $derived(store.imageInputs.get(id)?.objectURL ?? null);
 
   function handleFileChange(e: Event & { currentTarget: HTMLInputElement }) {
     const file = e.currentTarget.files?.[0];
     if (!file || !file.type.startsWith('image/')) return;
-    store.setInputImage(id, file);
+    store.setImageInput(id, file);
   }
 
-  let dialog: HTMLDialogElement;
-
-  // fix the exit animation playing inside the node
-  function portal(node: HTMLElement) {
-    document.body.appendChild(node);
-    return () => node.remove();
-  }
+  let dialog: InputNodeDialog;
 </script>
 
 {#snippet placeholder()}
   <div class="size-40 rounded-box bg-base-300"></div>
 {/snippet}
 
-{#snippet inputImage(imageURL: string)}
+{#snippet imageInput(imageURL: string)}
   <img src={imageURL} alt="Inspiration input" class="size-40 rounded-box object-cover" />
 {/snippet}
 
@@ -35,37 +31,19 @@
 >
   <button class="cursor-pointer" title="inspiration image input" onclick={() => dialog.showModal()}>
     {#if imageURL}
-      {@render inputImage(imageURL)}
+      {@render imageInput(imageURL)}
     {:else}
       {@render placeholder()}
     {/if}
   </button>
 
-  <!-- nest the dialog to fix HMR -->
-  <dialog bind:this={dialog} class="modal" {@attach portal}>
-    <div class="modal-box">
-      <h3 class="text-lg font-bold">Upload an image</h3>
-      <div class="flex flex-col items-center gap-3">
-        {#if imageURL}
-          {@render inputImage(imageURL)}
-        {:else}
-          {@render placeholder()}
-        {/if}
-
-        <input
-          type="file"
-          accept="image/*"
-          class="file-input file-input-sm"
-          onchange={handleFileChange}
-        />
-      </div>
-      <div class="modal-action">
-        <form method="dialog">
-          <!-- if there is a button, it will close the modal -->
-          <button class="btn">Close</button>
-        </form>
-      </div>
-    </div>
-  </dialog>
+  <InputNodeDialog
+    bind:this={dialog}
+    type="image"
+    {handleFileChange}
+    {imageURL}
+    {imageInput}
+    {placeholder}
+  />
 </div>
 <Handle type="source" position={Position.Right} />
