@@ -19,7 +19,9 @@
 </script>
 
 {#snippet placeholder()}
-  <div class="size-40 rounded-box bg-base-300"></div>
+  <div class="grid size-40 place-items-center rounded-box bg-base-300 text-base-content/30">
+    <span class="icon-[hugeicons--image-upload] text-4xl" aria-hidden="true"></span>
+  </div>
 {/snippet}
 
 {#snippet imageInput(imageURL: string)}
@@ -29,7 +31,12 @@
 <div
   class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
 >
-  <button class="cursor-pointer" title="inspiration image input" onclick={() => dialog.showModal()}>
+  <button
+    class="cursor-pointer"
+    title="Edit image inspiration"
+    aria-label="Edit image inspiration"
+    onclick={() => dialog.showModal()}
+  >
     {#if imageURL}
       {@render imageInput(imageURL)}
     {:else}

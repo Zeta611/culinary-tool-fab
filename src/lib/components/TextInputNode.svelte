@@ -19,7 +19,12 @@
 <div
   class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
 >
-  <button class="cursor-pointer" title="inspiration text input" onclick={() => dialog.showModal()}>
+  <button
+    class="cursor-pointer"
+    title="Edit text inspiration"
+    aria-label="Edit text inspiration"
+    onclick={() => dialog.showModal()}
+  >
     <div class="size-40 p-2 text-left text-xs">
       <p class="line-clamp-9 hyphens-manual">{preview}</p>
     </div>

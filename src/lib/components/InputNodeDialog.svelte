@@ -43,7 +43,7 @@
 
 <dialog bind:this={dialog} class="modal" {@attach portal}>
   <div class="modal-box flex flex-col gap-4">
-    <h3 class="text-lg font-semibold">
+    <h3 class="pr-8 text-lg font-semibold">
       {props.type === 'image' ? 'Upload an image' : 'Describe your inspiration'}
     </h3>
 
@@ -61,11 +61,6 @@
           class="file-input w-full"
           onchange={props.handleFileChange}
         />
-      </div>
-      <div class="modal-action mt-0">
-        <form method="dialog">
-          <button class="btn btn-ghost">Close</button>
-        </form>
       </div>
     {:else}
       <form
@@ -96,6 +91,16 @@
         </div>
       </form>
     {/if}
+
+    <form method="dialog">
+      <button
+        class="btn absolute top-3 right-3 btn-circle btn-ghost btn-sm"
+        aria-label="Close"
+        title="Close"
+      >
+        <span class="icon-[hugeicons--cancel-01] text-lg" aria-hidden="true"></span>
+      </button>
+    </form>
   </div>
   <form method="dialog" class="modal-backdrop">
     <button>close</button>

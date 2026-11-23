@@ -23,7 +23,9 @@
 </script>
 
 {#snippet placeholder()}
-  <div class="size-40 rounded-box bg-base-300"></div>
+  <div class="grid size-40 place-items-center rounded-box bg-base-300 text-base-content/30">
+    <span class="icon-[hugeicons--ai-image-01] text-4xl" aria-hidden="true"></span>
+  </div>
 {/snippet}
 
 {#snippet previewImage(imageURL: string)}
@@ -33,7 +35,12 @@
 <div
   class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
 >
-  <button class="cursor-pointer" title="inspiration image input" onclick={() => dialog.showModal()}>
+  <button
+    class="cursor-pointer"
+    title="Open image preview"
+    aria-label="Open image preview"
+    onclick={() => dialog.showModal()}
+  >
     {#if imageURL}
       {@render previewImage(imageURL)}
     {:else}
@@ -43,7 +50,7 @@
 
   <dialog bind:this={dialog} class="modal" {@attach portal}>
     <div class="modal-box flex max-w-lg flex-col gap-4">
-      <h3 class="text-lg font-semibold">Generated image</h3>
+      <h3 class="pr-8 text-lg font-semibold">Generated image</h3>
       <div class="flex flex-col items-center gap-4">
         {#if imageURL && generatePromise === null}
           {@render previewImage(imageURL)}
@@ -53,7 +60,10 @@
           {:then}
             {@render previewImage(imageURL!)}
           {:catch}
-            <p class="text-sm text-error">Image generation failed. Try again.</p>
+            <div role="alert" class="alert alert-soft alert-error">
+              <span class="icon-[hugeicons--alert-circle] text-lg" aria-hidden="true"></span>
+              Image generation failed. Try again.
+            </div>
           {/await}
         {:else}
           {@render placeholder()}
@@ -66,14 +76,20 @@
             generatePromise = onclickGenerate();
           }}
         >
+          <span class="icon-[hugeicons--ai-auto-rotate] text-lg" aria-hidden="true"></span>
           Generate
         </button>
       </div>
-      <div class="modal-action mt-0">
-        <form method="dialog">
-          <button class="btn btn-ghost">Close</button>
-        </form>
-      </div>
+
+      <form method="dialog">
+        <button
+          class="btn absolute top-3 right-3 btn-circle btn-ghost btn-sm"
+          aria-label="Close"
+          title="Close"
+        >
+          <span class="icon-[hugeicons--cancel-01] text-lg" aria-hidden="true"></span>
+        </button>
+      </form>
     </div>
     <form method="dialog" class="modal-backdrop">
       <button>close</button>

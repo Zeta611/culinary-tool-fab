@@ -28,7 +28,9 @@
 </script>
 
 {#snippet placeholder()}
-  <div class="size-40 rounded-box bg-base-300"></div>
+  <div class="grid size-40 place-items-center rounded-box bg-base-300 text-base-content/30">
+    <span class="icon-[hugeicons--image-upload] text-4xl" aria-hidden="true"></span>
+  </div>
 {/snippet}
 
 {#snippet imageInput(imageURL: string)}
@@ -40,19 +42,23 @@
 >
   <div class="flex size-40 flex-col gap-2 p-2">
     <button
+      title="Add image"
+      aria-label="Add image"
       class="btn h-auto flex-1 border-dashed btn-outline text-sm font-medium text-base-content/70"
       onclick={() => {
         id = null;
         imageInputNodeDialog.showModal();
       }}
     >
-      + Image
+      <span class="icon-[hugeicons--image-add-02] text-2xl" aria-hidden="true"></span>
     </button>
     <button
+      title="Add text"
+      aria-label="Add text"
       class="btn h-auto flex-1 border-dashed btn-outline text-sm font-medium text-base-content/70"
       onclick={() => textInputNodeDialog.showModal()}
     >
-      + Text
+      <span class="icon-[hugeicons--message-square-text] text-2xl" aria-hidden="true"></span>
     </button>
 
     <InputNodeDialog
