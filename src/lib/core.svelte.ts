@@ -28,7 +28,7 @@ export function canGenerateImagePreview() {
 }
 
 export async function generateImagePreview() {
-  if (!canGenerateImagePreview) return;
+  if (!canGenerateImagePreview()) return;
   generatingImagePreview = true;
   try {
     const { bytes, mediaType } = await ai.generateImagePreview({

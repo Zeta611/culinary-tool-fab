@@ -71,7 +71,7 @@
 
         <button
           class="btn btn-primary"
-          disabled={!canGenerateImagePreview}
+          disabled={!canGenerateImagePreview()}
           onclick={() => {
             generatePromise = onclickGenerate();
           }}
