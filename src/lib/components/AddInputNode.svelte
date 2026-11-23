@@ -38,18 +38,21 @@
 <div
   class="card overflow-hidden border-base-content/20 bg-base-100 shadow-sm card-border in-[.selected]:border-primary in-[.selected]:ring-3 in-[.selected]:ring-primary/20"
 >
-  <div class="flex size-40 flex-col gap-1 bg-base-300 p-1">
+  <div class="flex size-40 flex-col gap-2 p-2">
     <button
-      class="btn flex-1"
+      class="btn h-auto flex-1 border-dashed btn-outline text-sm font-medium text-base-content/70"
       onclick={() => {
         id = null;
         imageInputNodeDialog.showModal();
       }}
     >
-      + Image Inspiration
+      + Image
     </button>
-    <button class="btn flex-1" onclick={() => textInputNodeDialog.showModal()}>
-      + Text Inspiration
+    <button
+      class="btn h-auto flex-1 border-dashed btn-outline text-sm font-medium text-base-content/70"
+      onclick={() => textInputNodeDialog.showModal()}
+    >
+      + Text
     </button>
 
     <InputNodeDialog

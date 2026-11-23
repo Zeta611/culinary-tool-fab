@@ -42,9 +42,9 @@
   </button>
 
   <dialog bind:this={dialog} class="modal" {@attach portal}>
-    <div class="modal-box">
-      <h3 class="text-lg font-bold">Generated image</h3>
-      <div class="flex flex-col items-center gap-3">
+    <div class="modal-box flex max-w-lg flex-col gap-4">
+      <h3 class="text-lg font-semibold">Generated image</h3>
+      <div class="flex flex-col items-center gap-4">
         {#if imageURL && generatePromise === null}
           {@render previewImage(imageURL)}
         {:else if generatePromise}
@@ -53,7 +53,7 @@
           {:then}
             {@render previewImage(imageURL!)}
           {:catch}
-            Image generation error
+            <p class="text-sm text-error">Image generation failed. Try again.</p>
           {/await}
         {:else}
           {@render placeholder()}
@@ -69,13 +69,15 @@
           Generate
         </button>
       </div>
-      <div class="modal-action">
+      <div class="modal-action mt-0">
         <form method="dialog">
-          <!-- if there is a button, it will close the modal -->
-          <button class="btn">Close</button>
+          <button class="btn btn-ghost">Close</button>
         </form>
       </div>
     </div>
+    <form method="dialog" class="modal-backdrop">
+      <button>close</button>
+    </form>
   </dialog>
 </div>
 <Handle type="target" position={Position.Left} />
