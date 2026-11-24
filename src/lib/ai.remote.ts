@@ -22,38 +22,47 @@ export const test = query(v.string(), async (prompt) => {
 });
 
 const MAX_IMAGES = 4;
-export const generateImagePreview = command(
-  v.object({
-    images: v.pipe(
-      v.array(
-        v.pipe(
-          v.string(),
-          v.regex(/^data:image\/(png|jpeg|webp);base64,/, 'Must be a PNG, JPEG or WebP data URL')
-        )
-      ),
-      v.maxLength(MAX_IMAGES, 'Too many images')
+const imagePreviewInputSchema = v.object({
+  images: v.pipe(
+    v.array(
+      v.pipe(
+        v.string(),
+        v.regex(/^data:image\/(png|jpeg|webp);base64,/, 'Must be a PNG, JPEG or WebP data URL')
+      )
     ),
-    texts: v.array(v.pipe(v.string(), v.trim()))
-  }),
-  async ({ images, texts }) => {
-    if (images.length === 0 && texts.length === 0) throw new Error('Provide an input');
-    if (images.length > MAX_IMAGES) throw new Error('Too many images');
+    v.maxLength(MAX_IMAGES, 'Too many images')
+  ),
+  texts: v.array(v.pipe(v.string(), v.trim()))
+});
 
-    const result = await generateText({
-      model: openrouter(MULTI_MODEL),
-      messages: [
-        {
-          role: 'user',
-          content: [
-            { type: 'text', text: texts.join('\n') },
-            ...images.map((image) => ({ type: 'image' as const, image })) // data URLs
-          ]
-        }
-      ]
-    });
+export const generateImagePreview = command(imagePreviewInputSchema, async ({ images, texts }) => {
+  if (images.length === 0 && texts.length === 0) throw new Error('Provide an input');
+  if (images.length > MAX_IMAGES) throw new Error('Too many images');
 
-    const file = result.files.find((f) => f.mediaType.startsWith('image/'));
-    if (!file) throw new Error('No image returned');
-    return { bytes: file.uint8Array as Uint8Array<ArrayBuffer>, mediaType: file.mediaType };
-  }
-);
+  const result = await generateText({
+    model: openrouter(MULTI_MODEL, { usage: { include: true } }),
+    messages: [
+      {
+        role: 'user',
+        content: [
+          { type: 'text', text: texts.join('\n') },
+          ...images.map((image) => ({ type: 'image' as const, image })) // data URLs
+        ]
+      }
+    ]
+  });
+
+  const { usage } = (result.finalStep.providerMetadata?.openrouter ?? {}) as {
+    usage?: { promptTokens?: number; completionTokens?: number; cost?: number };
+  };
+  console.log(
+    `[${MULTI_MODEL}] input ${usage?.promptTokens ?? result.usage.inputTokens} tok, ` +
+      `output ${usage?.completionTokens ?? result.usage.outputTokens} tok, ` +
+      `cost ${usage?.cost != null ? `$${usage.cost.toFixed(5)}` : 'n/a'} ` +
+      `(${images.length} image${images.length === 1 ? '' : 's'} in)`
+  );
+
+  const file = result.files.find((f) => f.mediaType.startsWith('image/'));
+  if (!file) throw new Error('No image returned');
+  return { bytes: file.uint8Array as Uint8Array<ArrayBuffer>, mediaType: file.mediaType };
+});
