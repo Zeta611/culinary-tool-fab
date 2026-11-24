@@ -99,5 +99,11 @@ export const store = {
 
   get imagePreview() {
     return imagePreview;
+  },
+
+  /** Use an existing image as the concept preview (skips image generation). */
+  setImagePreview(image: File) {
+    if (imagePreview) URL.revokeObjectURL(imagePreview.objectURL);
+    imagePreview = { image, objectURL: URL.createObjectURL(image) };
   }
 };
